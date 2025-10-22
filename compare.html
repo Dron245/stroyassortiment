@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<title>Сравнение товаров</title>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<!-- <style>body{opacity: 0;}</style> -->
+	<link rel="stylesheet" href="css/style.min.css?_v=20251022110136">
+	<!-- <meta name="robots" content="noindex, nofollow"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div class="wrapper">
+		<main class="page">
+			<section class="page__compare compare">
+				<div class="compare__container">
+					<div class="compare__top">
+						<h1 class="compare__title title">Сравнения товаров</h1>
+						<div class="compare__actions">
+							<div class="compare__switch compare__action">
+								<label class="switch__label">
+									<input type="checkbox" class="switch__input" id="diff-only" />
+									<span class="switch__slider"></span>
+									<span class="switch__text">Только различающиеся</span>
+								</label>
+							</div>
+							<div class="compare__clear compare__action">
+								<button class="compare__button">
+									<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M12.4338 0.268722C12.7921 -0.0895739 13.3733 -0.0895739 13.7316 0.268722C14.0899 0.627018 14.0899 1.20828 13.7316 1.56657L8.29802 7.00017L13.7316 12.4338C14.0899 12.7921 14.0899 13.3733 13.7316 13.7316C13.3733 14.0899 12.7921 14.0899 12.4338 13.7316L7.00017 8.29802L1.56657 13.7316C1.20828 14.0899 0.627017 14.0899 0.268722 13.7316C-0.0895739 13.3733 -0.0895739 12.7921 0.268722 12.4338L5.70232 7.00017L0.268722 1.56657C-0.0895738 1.20828 -0.0895739 0.627017 0.268722 0.268722C0.627017 -0.0895734 1.20828 -0.0895738 1.56657 0.268722L7.00017 5.70232L12.4338 0.268722Z" fill="#D10909" />
+									</svg>
+									<span>Очистить корзину</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="compare__table">
+						<button class="compare__btn compare__btn_prev" disabled>
+							<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M9.29289 3.29289C9.68342 2.90237 10.3166 2.90237 10.7071 3.29289C11.0976 3.68342 11.0976 4.31658 10.7071 4.70711L7.41421 8L10.7071 11.2929C11.0976 11.6834 11.0976 12.3166 10.7071 12.7071C10.3166 13.0976 9.68342 13.0976 9.29289 12.7071L5.29289 8.70711C4.90237 8.31658 4.90237 7.68342 5.29289 7.29289L9.29289 3.29289Z" fill="white" />
+							</svg>
+						</button>
+						<button class="compare__btn compare__btn_next">
+							<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M9.29289 3.29289C9.68342 2.90237 10.3166 2.90237 10.7071 3.29289C11.0976 3.68342 11.0976 4.31658 10.7071 4.70711L7.41421 8L10.7071 11.2929C11.0976 11.6834 11.0976 12.3166 10.7071 12.7071C10.3166 13.0976 9.68342 13.0976 9.29289 12.7071L5.29289 8.70711C4.90237 8.31658 4.90237 7.68342 5.29289 7.29289L9.29289 3.29289Z" fill="white" />
+							</svg>
+						</button>
+						<div class="compare__col compare__col_fixed">
+							<div class="compare__cell compare__cell_header">Карточка товара</div>
+							<div class="compare__cell">Размеры</div>
+							<div class="compare__cell">Материал</div>
+							<div class="compare__cell">Страна</div>
+							<div class="compare__cell">Размеры</div>
+							<div class="compare__cell">Материал</div>
+							<div class="compare__cell">Страна</div>
+							<div class="compare__cell">Размеры</div>
+							<div class="compare__cell">Материал</div>
+							<div class="compare__cell">Страна</div>
+						</div>
+
+						<div class="compare__scroll">
+							<div class="compare__cols offers__cards">
+								<div class="compare__col">
+									<button type="button" class="compare__close close">
+										<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M13.8822 1.05298C14.1751 0.760187 14.65 0.760091 14.9428 1.05298C15.2354 1.34582 15.2353 1.8206 14.9428 2.11353L9.05799 7.99927L14.9428 13.886C15.2354 14.1789 15.2355 14.6547 14.9428 14.9475C14.6501 15.2403 14.1751 15.2399 13.8822 14.9475L7.99744 9.06079L2.11268 14.9475C1.81982 15.24 1.34483 15.2402 1.05213 14.9475C0.759359 14.6547 0.759515 14.1789 1.05213 13.886L6.93592 7.99927L1.05213 2.11353C0.759469 1.82058 0.759347 1.34585 1.05213 1.05298C1.34497 0.760055 1.81982 0.76008 2.11268 1.05298L7.99744 6.93872L13.8822 1.05298Z" fill="white" />
+										</svg>
+									</button>
+									<article id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26" data-entity="item" itemscope="" itemtype="http://schema.org/Product" class="compare__cell compare__cell_header first-cell">
+										<div class="offers-container-up">
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/">
+												<img itemprop="image" src="img/compare/tovar.webp" srcset="/upload/iblock/385/x8kzmiz9nne976y8106kdscf7eu5vl76.webp 2x" alt="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" loading="lazy" />
+											</a>
+											<div class="offers__choose d-block" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+												<link itemprop="url" href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" />
+												<meta itemprop="priceCurrency" content="RUB" />
+												<meta itemprop="price" content="2642.86" />
+												<link itemprop="availability" href="https://schema.org/InStock" />
+												<p class="product-item-price-current" data-priceoriginal="2642.86" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_price">
+													2&nbsp;642.86 ₽
+												</p>
+												<div class="d-flex">
+													<span class="status-item-one offers__choose-active">шт</span>
+													<span class="status-item-two" data-koef="1.111"> м2 </span>
+													<span class="status-item-three" data-koef="7"> м3 </span>
+												</div>
+											</div>
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" class="offers__desc" itemprop="name">Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1</a>
+											<meta itemprop="description" content="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" />
+										</div>
+										<div class="offers-container-down" data-name="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_basket_actions" data-entity="buttons-block">
+											<button id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_buy_link" class="offers__cards-cart" onclick="ym(94282972,'reachGoal','incart'); return true;">
+												<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-cart" x="0" y="0"></use>
+												</svg>
+												В корзину
+											</button>
+
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-save" x="0" y="0"></use>
+												</svg>
+											</button>
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M4.66572 7.75348V12.534M8.50039 5.46607V12.5338M12.3343 10.2797V12.5336M8.77352 16.3333H15.8333V1.66663H1.16667V16.3333H5.40336" stroke="#A6ABAD" stroke-width="2" stroke-linecap="square" />
+												</svg>
+											</button>
+										</div>
+									</article>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+								</div>
+								<div class="compare__col">
+									<button type="button" class="compare__close close">
+										<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M13.8822 1.05298C14.1751 0.760187 14.65 0.760091 14.9428 1.05298C15.2354 1.34582 15.2353 1.8206 14.9428 2.11353L9.05799 7.99927L14.9428 13.886C15.2354 14.1789 15.2355 14.6547 14.9428 14.9475C14.6501 15.2403 14.1751 15.2399 13.8822 14.9475L7.99744 9.06079L2.11268 14.9475C1.81982 15.24 1.34483 15.2402 1.05213 14.9475C0.759359 14.6547 0.759515 14.1789 1.05213 13.886L6.93592 7.99927L1.05213 2.11353C0.759469 1.82058 0.759347 1.34585 1.05213 1.05298C1.34497 0.760055 1.81982 0.76008 2.11268 1.05298L7.99744 6.93872L13.8822 1.05298Z" fill="white" />
+										</svg>
+									</button>
+									<article id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26" data-entity="item" itemscope="" itemtype="http://schema.org/Product" class="compare__cell compare__cell_header first-cell">
+										<div class="offers-container-up">
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/">
+												<img itemprop="image" src="img/compare/tovar.webp" srcset="/upload/iblock/385/x8kzmiz9nne976y8106kdscf7eu5vl76.webp 2x" alt="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" loading="lazy" />
+											</a>
+											<div class="offers__choose d-block" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+												<link itemprop="url" href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" />
+												<meta itemprop="priceCurrency" content="RUB" />
+												<meta itemprop="price" content="2642.86" />
+												<link itemprop="availability" href="https://schema.org/InStock" />
+												<p class="product-item-price-current" data-priceoriginal="2642.86" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_price">
+													2&nbsp;642.86 ₽
+												</p>
+												<div class="d-flex">
+													<span class="status-item-one offers__choose-active">шт</span>
+													<span class="status-item-two" data-koef="1.111"> м2 </span>
+													<span class="status-item-three" data-koef="7"> м3 </span>
+												</div>
+											</div>
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" class="offers__desc" itemprop="name">Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1</a>
+											<meta itemprop="description" content="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" />
+										</div>
+										<div class="offers-container-down" data-name="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_basket_actions" data-entity="buttons-block">
+											<button id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_buy_link" class="offers__cards-cart" onclick="ym(94282972,'reachGoal','incart'); return true;">
+												<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-cart" x="0" y="0"></use>
+												</svg>
+												В корзину
+											</button>
+
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-save" x="0" y="0"></use>
+												</svg>
+											</button>
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M4.66572 7.75348V12.534M8.50039 5.46607V12.5338M12.3343 10.2797V12.5336M8.77352 16.3333H15.8333V1.66663H1.16667V16.3333H5.40336" stroke="#A6ABAD" stroke-width="2" stroke-linecap="square" />
+												</svg>
+											</button>
+										</div>
+									</article>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+								</div>
+								<div class="compare__col">
+									<button type="button" class="compare__close close">
+										<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M13.8822 1.05298C14.1751 0.760187 14.65 0.760091 14.9428 1.05298C15.2354 1.34582 15.2353 1.8206 14.9428 2.11353L9.05799 7.99927L14.9428 13.886C15.2354 14.1789 15.2355 14.6547 14.9428 14.9475C14.6501 15.2403 14.1751 15.2399 13.8822 14.9475L7.99744 9.06079L2.11268 14.9475C1.81982 15.24 1.34483 15.2402 1.05213 14.9475C0.759359 14.6547 0.759515 14.1789 1.05213 13.886L6.93592 7.99927L1.05213 2.11353C0.759469 1.82058 0.759347 1.34585 1.05213 1.05298C1.34497 0.760055 1.81982 0.76008 2.11268 1.05298L7.99744 6.93872L13.8822 1.05298Z" fill="white" />
+										</svg>
+									</button>
+									<article id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26" data-entity="item" itemscope="" itemtype="http://schema.org/Product" class="compare__cell compare__cell_header first-cell">
+										<div class="offers-container-up">
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/">
+												<img itemprop="image" src="img/compare/tovar.webp" srcset="/upload/iblock/385/x8kzmiz9nne976y8106kdscf7eu5vl76.webp 2x" alt="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" loading="lazy" />
+											</a>
+											<div class="offers__choose d-block" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+												<link itemprop="url" href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" />
+												<meta itemprop="priceCurrency" content="RUB" />
+												<meta itemprop="price" content="2642.86" />
+												<link itemprop="availability" href="https://schema.org/InStock" />
+												<p class="product-item-price-current" data-priceoriginal="2642.86" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_price">
+													2&nbsp;642.86 ₽
+												</p>
+												<div class="d-flex">
+													<span class="status-item-one offers__choose-active">шт</span>
+													<span class="status-item-two" data-koef="1.111"> м2 </span>
+													<span class="status-item-three" data-koef="7"> м3 </span>
+												</div>
+											</div>
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" class="offers__desc" itemprop="name">Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1</a>
+											<meta itemprop="description" content="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" />
+										</div>
+										<div class="offers-container-down" data-name="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_basket_actions" data-entity="buttons-block">
+											<button id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_buy_link" class="offers__cards-cart" onclick="ym(94282972,'reachGoal','incart'); return true;">
+												<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-cart" x="0" y="0"></use>
+												</svg>
+												В корзину
+											</button>
+
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-save" x="0" y="0"></use>
+												</svg>
+											</button>
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M4.66572 7.75348V12.534M8.50039 5.46607V12.5338M12.3343 10.2797V12.5336M8.77352 16.3333H15.8333V1.66663H1.16667V16.3333H5.40336" stroke="#A6ABAD" stroke-width="2" stroke-linecap="square" />
+												</svg>
+											</button>
+										</div>
+									</article>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+								</div>
+								<div class="compare__col">
+									<button type="button" class="compare__close close">
+										<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M13.8822 1.05298C14.1751 0.760187 14.65 0.760091 14.9428 1.05298C15.2354 1.34582 15.2353 1.8206 14.9428 2.11353L9.05799 7.99927L14.9428 13.886C15.2354 14.1789 15.2355 14.6547 14.9428 14.9475C14.6501 15.2403 14.1751 15.2399 13.8822 14.9475L7.99744 9.06079L2.11268 14.9475C1.81982 15.24 1.34483 15.2402 1.05213 14.9475C0.759359 14.6547 0.759515 14.1789 1.05213 13.886L6.93592 7.99927L1.05213 2.11353C0.759469 1.82058 0.759347 1.34585 1.05213 1.05298C1.34497 0.760055 1.81982 0.76008 2.11268 1.05298L7.99744 6.93872L13.8822 1.05298Z" fill="white" />
+										</svg>
+									</button>
+									<article id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26" data-entity="item" itemscope="" itemtype="http://schema.org/Product" class="compare__cell compare__cell_header first-cell">
+										<div class="offers-container-up">
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/">
+												<img itemprop="image" src="img/compare/tovar.webp" srcset="/upload/iblock/385/x8kzmiz9nne976y8106kdscf7eu5vl76.webp 2x" alt="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" loading="lazy" />
+											</a>
+											<div class="offers__choose d-block" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+												<link itemprop="url" href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" />
+												<meta itemprop="priceCurrency" content="RUB" />
+												<meta itemprop="price" content="2642.86" />
+												<link itemprop="availability" href="https://schema.org/InStock" />
+												<p class="product-item-price-current" data-priceoriginal="2642.86" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_price">
+													2&nbsp;642.86 ₽
+												</p>
+												<div class="d-flex">
+													<span class="status-item-one offers__choose-active">шт</span>
+													<span class="status-item-two" data-koef="1.111"> м2 </span>
+													<span class="status-item-three" data-koef="7"> м3 </span>
+												</div>
+											</div>
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" class="offers__desc" itemprop="name">Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1</a>
+											<meta itemprop="description" content="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" />
+										</div>
+										<div class="offers-container-down" data-name="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_basket_actions" data-entity="buttons-block">
+											<button id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_buy_link" class="offers__cards-cart" onclick="ym(94282972,'reachGoal','incart'); return true;">
+												<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-cart" x="0" y="0"></use>
+												</svg>
+												В корзину
+											</button>
+
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-save" x="0" y="0"></use>
+												</svg>
+											</button>
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M4.66572 7.75348V12.534M8.50039 5.46607V12.5338M12.3343 10.2797V12.5336M8.77352 16.3333H15.8333V1.66663H1.16667V16.3333H5.40336" stroke="#A6ABAD" stroke-width="2" stroke-linecap="square" />
+												</svg>
+											</button>
+										</div>
+									</article>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+								</div>
+								<div class="compare__col">
+									<button type="button" class="compare__close close">
+										<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M13.8822 1.05298C14.1751 0.760187 14.65 0.760091 14.9428 1.05298C15.2354 1.34582 15.2353 1.8206 14.9428 2.11353L9.05799 7.99927L14.9428 13.886C15.2354 14.1789 15.2355 14.6547 14.9428 14.9475C14.6501 15.2403 14.1751 15.2399 13.8822 14.9475L7.99744 9.06079L2.11268 14.9475C1.81982 15.24 1.34483 15.2402 1.05213 14.9475C0.759359 14.6547 0.759515 14.1789 1.05213 13.886L6.93592 7.99927L1.05213 2.11353C0.759469 1.82058 0.759347 1.34585 1.05213 1.05298C1.34497 0.760055 1.81982 0.76008 2.11268 1.05298L7.99744 6.93872L13.8822 1.05298Z" fill="white" />
+										</svg>
+									</button>
+									<article id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26" data-entity="item" itemscope="" itemtype="http://schema.org/Product" class="compare__cell compare__cell_header first-cell">
+										<div class="offers-container-up">
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/">
+												<img itemprop="image" src="img/compare/tovar.webp" srcset="/upload/iblock/385/x8kzmiz9nne976y8106kdscf7eu5vl76.webp 2x" alt="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" loading="lazy" />
+											</a>
+											<div class="offers__choose d-block" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+												<link itemprop="url" href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" />
+												<meta itemprop="priceCurrency" content="RUB" />
+												<meta itemprop="price" content="2642.86" />
+												<link itemprop="availability" href="https://schema.org/InStock" />
+												<p class="product-item-price-current" data-priceoriginal="2642.86" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_price">
+													2&nbsp;642.86 ₽
+												</p>
+												<div class="d-flex">
+													<span class="status-item-one offers__choose-active">шт</span>
+													<span class="status-item-two" data-koef="1.111"> м2 </span>
+													<span class="status-item-three" data-koef="7"> м3 </span>
+												</div>
+											</div>
+											<a href="catalog/pilomaterialy/brus/obreznoy/iz-khvoi/brus-obreznoy-estestvennoy-vlazhnosti-khvoya-150kh150kh6000-sort-1/" class="offers__desc" itemprop="name">Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1</a>
+											<meta itemprop="description" content="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" />
+										</div>
+										<div class="offers-container-down" data-name="Брус обрезной естественной влажности хвоя 150х150х6000 сорт 1" id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_basket_actions" data-entity="buttons-block">
+											<button id="bx_1970176138_14354_4ab978e8bec606ce72388dc8980b7e26_buy_link" class="offers__cards-cart" onclick="ym(94282972,'reachGoal','incart'); return true;">
+												<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-cart" x="0" y="0"></use>
+												</svg>
+												В корзину
+											</button>
+
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<use href="/local/templates/final/images/sprite.svg#offers-save" x="0" y="0"></use>
+												</svg>
+											</button>
+											<button data-item="14354" class="offers__cards-save add_wishlist">
+												<svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M4.66572 7.75348V12.534M8.50039 5.46607V12.5338M12.3343 10.2797V12.5336M8.77352 16.3333H15.8333V1.66663H1.16667V16.3333H5.40336" stroke="#A6ABAD" stroke-width="2" stroke-linecap="square" />
+												</svg>
+											</button>
+										</div>
+									</article>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>100×200 см
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Хлопок
+									</div>
+									<div class="compare__cell">
+										<p class="compare__feature"></p>Россия
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+	<script src="js/app.min.js?_v=20251022110136"></script>
+</body>
+
+</html>
