@@ -366,14 +366,6 @@
                     return;
                 }
             }.bind(this));
-            if (this.options.hashSettings.goHash) {
-                window.addEventListener("hashchange", function() {
-                    if (window.location.hash) this._openToHash(); else this.close(this.targetOpen.selector);
-                }.bind(this));
-                window.addEventListener("load", function() {
-                    if (window.location.hash) this._openToHash();
-                }.bind(this));
-            }
         }
         open(selectorValue) {
             if (bodyLockStatus) {
@@ -478,12 +470,6 @@
         }
         _getHash() {
             if (this.options.hashSettings.location) this.hash = this.targetOpen.selector.includes("#") ? this.targetOpen.selector : this.targetOpen.selector.replace(".", "#");
-        }
-        _openToHash() {
-            let classInHash = document.querySelector(`.${window.location.hash.replace("#", "")}`) ? `.${window.location.hash.replace("#", "")}` : document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` : null;
-            const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`);
-            this.youTubeCode = buttons.getAttribute(this.options.youtubeAttribute) ? buttons.getAttribute(this.options.youtubeAttribute) : null;
-            if (buttons && classInHash) this.open(classInHash);
         }
         _setHash() {
             history.pushState("", "", this.hash);
@@ -754,18 +740,35 @@
         applyMobileFeatures();
         const tabsLinks = document.querySelectorAll(".lk__tabs a");
         const content = document.querySelector(".lk__content");
+        function activateTab(hash) {
+            const link = Array.from(tabsLinks).find(a => a.getAttribute("href").endsWith(hash));
+            if (!link) return;
+            tabsLinks.forEach(l => l.classList.remove("_lk-active"));
+            link.classList.add("_lk-active");
+            fetch(link.getAttribute("href")).then(res => res.text()).then(html => {
+                const parser = new DOMParser;
+                const doc = parser.parseFromString(html, "text/html");
+                const mainContent = doc.querySelector(".lk__content").innerHTML;
+                content.innerHTML = mainContent;
+            });
+        }
         tabsLinks.forEach(link => {
             link.addEventListener("click", e => {
                 e.preventDefault();
-                tabsLinks.forEach(l => l.classList.remove("_lk-active"));
-                link.classList.add("_lk-active");
-                fetch(link.getAttribute("href")).then(res => res.text()).then(html => {
-                    const parser = new DOMParser;
-                    const doc = parser.parseFromString(html, "text/html");
-                    const mainContent = doc.querySelector(".lk__content").innerHTML;
-                    content.innerHTML = mainContent;
-                });
+                const hash = link.getAttribute("href").split("/").pop();
+                const tabName = hash.replace(".html", "");
+                history.pushState(null, "", `#${tabName}`);
+                console.log(hash);
+                activateTab(hash);
             });
+        });
+        let initialHash = location.hash ? location.hash.slice(1) : "profile";
+        let initialHref = Array.from(tabsLinks).find(a => a.getAttribute("href").includes(initialHash + ".html"));
+        if (initialHref) activateTab(initialHref.getAttribute("href"));
+        window.addEventListener("hashchange", () => {
+            const hash = location.hash.slice(1);
+            const link = Array.from(tabsLinks).find(a => a.getAttribute("href").includes(hash + ".html"));
+            if (link) activateTab(link.getAttribute("href"));
         });
     });
     spollers();
