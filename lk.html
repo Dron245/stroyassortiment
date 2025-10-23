@@ -6,36 +6,89 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20251022122357">
+	<link rel="stylesheet" href="css/style.min.css?_v=20251023120603">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-	<div class="lk">
-		<aside class="lk__sidebar">
-			<ul class="lk__tabs">
-				<li>
-					<a class="lk__link _lk-active" href="lk.html" data-lk-link>Профиль</a>
-				</li>
-				<li>
-					<a class="lk__link" href="orders.html" data-lk-link>Заказы</a>
-				</li>
-			</ul>
-		</aside>
+	<div class="wrapper">
+		<section class="page__lk lk">
+			<div class="lk__container">
+				<h1 class="lk__title title"><a href="#">Личный кабинет</a></h1>
+				<div class="lk__body">
+					<aside class="lk__sidebar">
+						<ul class="lk__tabs">
+							<li>
+								<a class="lk__link" href="lk.html">Профиль</a>
+							</li>
+							<li>
+								<a class="lk__link" href="#">Корзина</a>
+							</li>
+							<li>
+								<a class="lk__link" href="#">Избранное</a>
+							</li>
+							<li>
+								<a class="lk__link" href="orders.html">Завершённые заказы</a>
+							</li>
+							<li>
+								<button class="lk__link" href="#">Выйти</button>
+							</li>
+						</ul>
+					</aside>
 
-		<main class="lk__content" id="lk-content">
-			<div class="lk__content">
-				<h2>Профиль пользователя</h2>
-				<p>Имя: Иван Иванов</p>
-				<p>Email: ivan@example.com</p>
-				<h1 class="title">тест</h1>
-				<button class="button">Привет</button>
+					<main class="lk__content">
+						<div class="lk__content profile">
+							<form action="" class="profile__form form">
+								<h2 class="profile__title title">Контактные данные</h2>
+								<div class="form-faq__row form-faq__row_lk">
+									<div class="form-faq__item">
+										<div class="form-faq__body">
+											<input autocomplete="off" value="Иван" type="text" id="name-lk" name="name-lk" class="form-faq__input" required placeholder="" />
+											<label for="name-lk" class="form-faq__label">Имя<span>*</span></label>
+										</div>
+									</div>
+									<div class="form-faq__item">
+										<div class="form-faq__body">
+											<input autocomplete="off" value="Иванов" type="text" id="soname-lk" name="soname-lk" class="form-faq__input" required placeholder="" />
+											<label for="soname-lk" class="form-faq__label">Фамилия<span>*</span></label>
+										</div>
+									</div>
+								</div>
+								<div class="form-faq__row form-faq__row_lk">
+									<div class="form-faq__item">
+										<div class="form-faq__body">
+											<input autocomplete="off" value="+7 (999) 999-99-99" type="tel" id="tel-lk" name="tel-lk" class="form-faq__input" required placeholder="" />
+											<label for="tel-lk" class="form-faq__label">Телефон<span>*</span></label>
+										</div>
+									</div>
+									<div class="form-faq__item">
+										<div class="form-faq__body">
+											<input autocomplete="off" value="email@ya.ru" type="email" id="email-lk" name="email-lk" class="form-faq__input" required placeholder="" />
+											<label for="email-lk" class="form-faq__label">Email<span>*</span></label>
+										</div>
+									</div>
+								</div>
+								<h2 class="profile__title title">Пароль</h2>
+								<div class="form-faq__row form-faq__row_lk">
+									<div class="form-faq__item">
+										<div class="form-faq__body">
+											<input autocomplete="off" value="password" type="password" id="pass-lk" name="pass-lk" class="form-faq__input" required placeholder="" />
+											<label for="pass-lk" class="form-faq__label">Пароль<span>*</span></label>
+										</div>
+									</div>
+								</div>
+								<button type="submit" class="profile__btn button">
+									<span>Сохранить изменения</span>
+								</button>
+							</form>
+						</div>
+					</main>
+				</div>
 			</div>
-		</main>
+		</section>
 	</div>
-
-	<script src="js/app.min.js?_v=20251022122357"></script>
+	<script src="js/app.min.js?_v=20251023120603"></script>
 </body>
 
 </html>

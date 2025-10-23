@@ -6060,6 +6060,11 @@ body::after {
   grid-template-columns: repeat(3,1fr);
   gap: 30px
 }
+.form-faq__row_lk {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 30px
+}
 .form-faq__row_submit {
   display: flex;
   gap: 30px;
@@ -6307,38 +6312,38 @@ body::after {
 .social-nosearch__item_vk {
   background-color: #1976d2
 }
-.lk {
-  display: flex
+.lk__body {
+  display: flex;
+  gap: 30px
 }
 .lk__sidebar {
-  width: 220px;
-  background: #f9f9f9;
-  padding: 20px
+  flex: 0 0 354px
 }
 .lk__sidebar .lk__tabs {
-  list-style: none;
-  padding: 0
+  display: flex;
+  flex-direction: column
 }
 .lk__sidebar .lk__tabs li {
-  margin-bottom: 10px
+  border: 1px solid #e4e4e4;
+  border-radius: 4px 4px 0 0;
+  border-bottom: none
 }
-.lk__sidebar .lk__tabs li a {
+.lk__sidebar .lk__tabs li:last-child {
+  border-bottom: 1px solid #e4e4e4
+}
+.lk__sidebar .lk__tabs li .lk__link {
   display: block;
-  text-decoration: none;
-  color: #333;
-  padding: 8px 12px;
-  border-radius: 4px
+  padding: 20px 30px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 145%;
+  color: #1a1d1f;
+  background-color: #fff;
+  transition: color .3s ease-in-out,background-color .3s ease-in-out
 }
-.lk__sidebar .lk__tabs li a._lk-active,
-.lk__sidebar .lk__tabs li a:hover {
-  background: #007bff;
-  color: #fff
-}
-.lk__content {
-  flex: 1;
-  padding: 20px;
-  background: #fff;
-  border-left: 1px solid #ddd
+.lk__sidebar .lk__tabs li ._lk-active {
+  color: #fff;
+  background-color: #30b45b
 }
 @media (width <= 62em)and (min-width:23.75em) {
   .page__question-answer {
@@ -6356,6 +6361,11 @@ body::after {
   }
   .question-answer__top {
     margin-bottom: 2.5rem
+  }
+}
+@media (min-width:48em) {
+  .lk {
+    margin-block: 5.625rem
   }
 }
 @media (width <= 62em)and (min-width:62em) {
@@ -7490,6 +7500,11 @@ body::after {
     margin-top: 3.125rem
   }
 }
+@media (max-width:20em) {
+  .lk {
+    margin-block: 3.125rem
+  }
+}
 @media (width <= 62em)and (max-width:23.75em) {
   .title {
     margin-bottom: 1.25rem
@@ -7555,6 +7570,11 @@ body::after {
 @media (width <= 62em)and (min-width:20em)and (max-width:23.75em) {
   .page__question-answer {
     margin-top: clamp(3.125rem ,-10.2083333333rem + 66.6666666667vw ,5.625rem)
+  }
+}
+@media (min-width:20em)and (max-width:48em) {
+  .lk {
+    margin-block: clamp(3.125rem ,1.3392857143rem + 8.9285714286vw ,5.625rem)
   }
 }
 @media screen and (max-widtH:480px) {
@@ -7676,6 +7696,10 @@ body::after {
   .social-nosearch__item_vk:hover {
     background-color: #3392ef
   }
+  .lk__sidebar .lk__tabs li .lk__link:hover {
+    color: #fff;
+    background-color: #3bd86d
+  }
 }
 @media (hover:none)and (pointer:coarse) {
   .button:active {
@@ -7716,6 +7740,10 @@ body::after {
   }
   .social-nosearch__item_vk:active {
     background-color: #3392ef
+  }
+  .lk__sidebar .lk__tabs li .lk__link:active {
+    color: #fff;
+    background-color: #3bd86d
   }
 }
 @media (43.8125em < width <= 68.75em) {
@@ -7776,6 +7804,10 @@ body::after {
 }
 @media (width <= 720px) {
   .form-faq__row_inputs {
+    grid-template-columns: repeat(1,1fr);
+    gap: 20px
+  }
+  .form-faq__row_lk {
     grid-template-columns: repeat(1,1fr);
     gap: 20px
   }

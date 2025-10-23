@@ -508,34 +508,139 @@
             });
         }
     }, 0);
-    document.addEventListener("DOMContentLoaded", () => {
+    let cols = document.querySelectorAll(".compare__col");
+    let start = 0;
+    const VISIBLE = 4;
+    const COL_WIDTH = 302;
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+    function update() {
         const colsContainer = document.querySelector(".compare__cols");
         const btnPrev = document.querySelector(".compare__btn_prev");
         const btnNext = document.querySelector(".compare__btn_next");
-        let cols = document.querySelectorAll(".compare__col");
-        const COL_WIDTH = 302;
-        const VISIBLE = 4;
-        let start = 0;
-        function update() {
-            const total = cols.length;
-            const offset = -start * COL_WIDTH;
-            if (!colsContainer) return;
-            colsContainer.style.transform = `translateX(${offset}px)`;
-            btnPrev.disabled = start === 0;
-            btnNext.disabled = start >= total - VISIBLE;
+        if (!colsContainer) return;
+        const handleResize = debounce(update, 200);
+        window.addEventListener("resize", handleResize);
+        const total = cols.length;
+        const offset = -start * COL_WIDTH;
+        colsContainer.style.transform = `translateX(${offset}px)`;
+        btnPrev.disabled = start === 0;
+        btnNext.disabled = start >= total - VISIBLE;
+    }
+    function next() {
+        if (start < cols.length - VISIBLE) {
+            start++;
+            update();
         }
-        function next() {
-            if (start < cols.length - VISIBLE) {
-                start++;
-                update();
+    }
+    function prev() {
+        if (start > 0) {
+            start--;
+            update();
+        }
+    }
+    function removeColumn(target) {
+        const col = target.closest(".compare__col");
+        if (!col) return;
+        col.remove();
+        cols = document.querySelectorAll(".compare__col");
+        if (start > cols.length - VISIBLE) start = Math.max(0, cols.length - VISIBLE);
+        update();
+    }
+    function applyMobileFeatures() {
+        const isMobile = window.innerWidth <= 768;
+        const fixedCol = document.querySelector(".compare__col_fixed");
+        const scrollCols = document.querySelectorAll(".compare__scroll .compare__col");
+        if (!fixedCol || !scrollCols.length) return;
+        const fixedCells = fixedCol.querySelectorAll(".compare__cell");
+        scrollCols.forEach(col => {
+            const cells = col.querySelectorAll(".compare__cell");
+            cells.forEach((cell, i) => {
+                if (i === 0) return;
+                let feature = cell.querySelector(".compare__feature");
+                if (isMobile) {
+                    if (!feature) {
+                        feature = document.createElement("div");
+                        feature.className = "compare__feature";
+                        cell.prepend(feature);
+                    }
+                    const label = fixedCells[i]?.textContent?.trim() || "";
+                    feature.textContent = label;
+                } else if (feature) feature.remove();
+            });
+        });
+    }
+    function setHeaderHeights() {
+        const headerCells = document.querySelectorAll(".compare__col_fixed .compare__cell_header, .compare__col .compare__cell_header");
+        if (!headerCells.length) return;
+        headerCells.forEach(cell => cell.style.height = "auto");
+        let maxHeight = 0;
+        headerCells.forEach(cell => {
+            const h = cell.offsetHeight;
+            if (h > maxHeight) maxHeight = h;
+        });
+        headerCells.forEach(cell => cell.style.height = maxHeight + "px");
+    }
+    function initProfileFormSave() {
+        const form = document.querySelector(".profile__form");
+        if (!form) return;
+        const button = form.querySelector('button[type="submit"]');
+        const inputs = form.querySelectorAll("input[name]");
+        if (!button || !inputs.length) return;
+        const savedData = JSON.parse(localStorage.getItem("profileData") || "{}");
+        inputs.forEach(input => {
+            if (savedData[input.name] && savedData[input.name] !== input.value) input.value = savedData[input.name];
+        });
+        let notify = form.querySelector(".form__notify");
+        if (!notify) {
+            notify = document.createElement("div");
+            notify.className = "form__notify";
+            form.appendChild(notify);
+        }
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            let hasError = false;
+            const data = {};
+            inputs.forEach(input => {
+                const value = input.value.trim();
+                const item = input.closest(".form-faq__item") || input.parentElement;
+                item?.classList.remove("_error");
+                if (!value) {
+                    hasError = true;
+                    item?.classList.add("_error");
+                }
+                data[input.name] = value;
+            });
+            if (hasError) {
+                notify.textContent = "Заполните все обязательные поля ❗";
+                notify.classList.add("_active", "_error");
+                setTimeout(() => notify.classList.remove("_active", "_error"), 3e3);
+                return;
             }
-        }
-        function prev() {
-            if (start > 0) {
-                start--;
-                update();
-            }
-        }
+            button.disabled = true;
+            button.classList.add("_loading");
+            const oldText = button.textContent;
+            button.textContent = "Сохраняем...";
+            setTimeout(() => {
+                localStorage.setItem("profileData", JSON.stringify(data));
+                button.disabled = false;
+                button.classList.remove("_loading");
+                button.textContent = oldText;
+                notify.textContent = "Изменения сохранены ✅";
+                notify.classList.remove("_error");
+                notify.classList.add("_active");
+                setTimeout(() => {
+                    notify.classList.remove("_active");
+                }, 2500);
+            }, 1500);
+        });
+    }
+    function initForms(scope = document) {
         const forms = document.querySelectorAll("form");
         forms.forEach(form => {
             form.setAttribute("novalidate", "");
@@ -624,10 +729,7 @@
                         }
                     }
                 });
-                if (!hasError) {
-                    form.closest(".form-faq")?.classList.add("form-faq_success-active");
-                    form.submit();
-                }
+                if (!hasError) form.closest(".form-faq")?.classList.add("form-faq_success-active");
             });
             inputs.forEach(input => {
                 input.addEventListener("focus", () => clearError(input));
@@ -645,20 +747,70 @@
                 }
             });
         });
+    }
+    async function activateTab(hash) {
+        const tabsLinks = document.querySelectorAll(".lk__tabs a");
+        const content = document.querySelector(".lk__content");
+        if (!tabsLinks.length || !content) return;
+        const link = Array.from(tabsLinks).find(a => a.getAttribute("href").endsWith(hash));
+        if (!link) return;
+        tabsLinks.forEach(l => l.classList.remove("_lk-active"));
+        link.classList.add("_lk-active");
+        content.classList.add("_loading");
+        try {
+            const res = await fetch(link.getAttribute("href"));
+            if (!res.ok) throw new Error("Ошибка загрузки вкладки");
+            const html = await res.text();
+            const parser = new DOMParser;
+            const doc = parser.parseFromString(html, "text/html");
+            const mainContent = doc.querySelector(".lk__content")?.innerHTML || "";
+            content.innerHTML = mainContent;
+            content.classList.remove("_loading");
+            initForms(content);
+            initProfileFormSave();
+        } catch (err) {
+            console.error(err);
+            content.classList.remove("_loading");
+            content.innerHTML = "<p class='lk__error'>Не удалось загрузить вкладку 😞</p>";
+        }
+    }
+    function initLkTabs() {
+        const tabsLinks = document.querySelectorAll(".lk__tabs a");
+        if (!tabsLinks.length) return;
+        function openTabFromHash() {
+            const hash = location.hash.slice(1) || "profile";
+            const link = Array.from(tabsLinks).find(a => a.getAttribute("href").includes(hash + ".html"));
+            if (link) {
+                const href = link.getAttribute("href");
+                activateTab(href);
+            } else {
+                const firstLink = tabsLinks[0];
+                if (firstLink) {
+                    const firstHref = firstLink.getAttribute("href");
+                    history.replaceState(null, "", "#lk");
+                    activateTab(firstHref);
+                }
+            }
+        }
+        tabsLinks.forEach(link => {
+            link.addEventListener("click", e => {
+                e.preventDefault();
+                const hash = link.getAttribute("href").split("/").pop();
+                const tabName = hash.replace(".html", "");
+                history.pushState(null, "", `#${tabName}`);
+                openTabFromHash();
+            });
+        });
+        openTabFromHash();
+        window.addEventListener("hashchange", openTabFromHash);
+    }
+    document.addEventListener("DOMContentLoaded", () => {
         document.documentElement.addEventListener("click", e => {
             const target = e.target;
             console.log(target);
             if (target.closest(".compare__btn_next")) next();
             if (target.closest(".compare__btn_prev")) prev();
-            if (target.closest(".compare__close")) {
-                const col = target.closest(".compare__col");
-                if (col) {
-                    col.remove();
-                    cols = document.querySelectorAll(".compare__col");
-                    if (start > cols.length - VISIBLE) start = Math.max(0, cols.length - VISIBLE);
-                    update();
-                }
-            }
+            if (target.closest(".compare__close")) removeColumn(target);
             if (e.target.closest(".form-faq__close")) {
                 const formBlock = e.target.closest(".form-faq");
                 formBlock.classList.remove("form-faq_success-active");
@@ -666,34 +818,12 @@
                 form.reset();
             }
         });
-        function debounce(fn, delay = 200) {
-            let timer;
-            return function(...args) {
-                clearTimeout(timer);
-                timer = setTimeout(() => fn.apply(this, args), delay);
-            };
-        }
-        const handleResize = debounce(update, 200);
-        window.addEventListener("resize", handleResize);
         update();
-        function setHeaderHeights() {
-            const headerCells = document.querySelectorAll(".compare__col_fixed .compare__cell_header, .compare__col .compare__cell_header");
-            if (!headerCells.length) return;
-            headerCells.forEach(cell => cell.style.height = "auto");
-            let maxHeight = 0;
-            headerCells.forEach(cell => {
-                const h = cell.offsetHeight;
-                if (h > maxHeight) maxHeight = h;
-            });
-            headerCells.forEach(cell => cell.style.height = maxHeight + "px");
-        }
-        function debounce(fn, delay = 200) {
-            let timeout;
-            return function(...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => fn.apply(this, args), delay);
-            };
-        }
+        const updateFeatures = debounce(applyMobileFeatures, 100);
+        window.addEventListener("resize", updateFeatures);
+        window.addEventListener("load", applyMobileFeatures);
+        applyMobileFeatures();
+        initForms(document);
         const updateHeight = debounce(setHeaderHeights, 200);
         window.addEventListener("resize", updateHeight);
         setTimeout(setHeaderHeights, 200);
@@ -704,72 +834,7 @@
                 updateHeight();
             });
         });
-        function applyMobileFeatures() {
-            const isMobile = window.innerWidth <= 768;
-            const fixedCol = document.querySelector(".compare__col_fixed");
-            const scrollCols = document.querySelectorAll(".compare__scroll .compare__col");
-            if (!fixedCol || !scrollCols.length) return;
-            const fixedCells = fixedCol.querySelectorAll(".compare__cell");
-            scrollCols.forEach(col => {
-                const cells = col.querySelectorAll(".compare__cell");
-                cells.forEach((cell, i) => {
-                    if (i === 0) return;
-                    let feature = cell.querySelector(".compare__feature");
-                    if (isMobile) {
-                        if (!feature) {
-                            feature = document.createElement("div");
-                            feature.className = "compare__feature";
-                            cell.prepend(feature);
-                        }
-                        const label = fixedCells[i]?.textContent?.trim() || "";
-                        feature.textContent = label;
-                    } else if (feature) feature.remove();
-                });
-            });
-        }
-        function debounce(fn, delay = 200) {
-            let timer;
-            return function(...args) {
-                clearTimeout(timer);
-                timer = setTimeout(() => fn.apply(this, args), delay);
-            };
-        }
-        const updateFeatures = debounce(applyMobileFeatures, 100);
-        window.addEventListener("resize", updateFeatures);
-        window.addEventListener("load", applyMobileFeatures);
-        applyMobileFeatures();
-        const tabsLinks = document.querySelectorAll(".lk__tabs a");
-        const content = document.querySelector(".lk__content");
-        function activateTab(hash) {
-            const link = Array.from(tabsLinks).find(a => a.getAttribute("href").endsWith(hash));
-            if (!link) return;
-            tabsLinks.forEach(l => l.classList.remove("_lk-active"));
-            link.classList.add("_lk-active");
-            fetch(link.getAttribute("href")).then(res => res.text()).then(html => {
-                const parser = new DOMParser;
-                const doc = parser.parseFromString(html, "text/html");
-                const mainContent = doc.querySelector(".lk__content").innerHTML;
-                content.innerHTML = mainContent;
-            });
-        }
-        tabsLinks.forEach(link => {
-            link.addEventListener("click", e => {
-                e.preventDefault();
-                const hash = link.getAttribute("href").split("/").pop();
-                const tabName = hash.replace(".html", "");
-                history.pushState(null, "", `#${tabName}`);
-                console.log(hash);
-                activateTab(hash);
-            });
-        });
-        let initialHash = location.hash ? location.hash.slice(1) : "profile";
-        let initialHref = Array.from(tabsLinks).find(a => a.getAttribute("href").includes(initialHash + ".html"));
-        if (initialHref) activateTab(initialHref.getAttribute("href"));
-        window.addEventListener("hashchange", () => {
-            const hash = location.hash.slice(1);
-            const link = Array.from(tabsLinks).find(a => a.getAttribute("href").includes(hash + ".html"));
-            if (link) activateTab(link.getAttribute("href"));
-        });
+        initLkTabs();
     });
     spollers();
 })();
