@@ -777,8 +777,28 @@
     function initLkTabs() {
         const tabsLinks = document.querySelectorAll(".lk__tabs a");
         if (!tabsLinks.length) return;
+        (function fixHashForStandalonePages() {
+            const currentPage = location.pathname.split("/").pop();
+            const hash = location.hash.slice(1);
+            if (!hash && currentPage.endsWith(".html") && currentPage !== "lk.html") {
+                const tabName = currentPage.replace(".html", "");
+                history.replaceState(null, "", `#${tabName}`);
+            }
+        })();
+        function setActiveTab(tabName) {
+            tabsLinks.forEach(a => {
+                const href = a.getAttribute("href");
+                const name = href.split("/").pop().replace(".html", "");
+                a.classList.toggle("_lk-active", name === tabName);
+            });
+        }
         function openTabFromHash() {
-            const hash = location.hash.slice(1) || "profile";
+            if (location.pathname.includes("orders-item.html")) {
+                console.log(location.pathname);
+                setActiveTab("orders");
+                return;
+            }
+            const hash = location.hash.slice(1) || "lk";
             const link = Array.from(tabsLinks).find(a => a.getAttribute("href").includes(hash + ".html"));
             if (link) {
                 const href = link.getAttribute("href");
@@ -797,12 +817,29 @@
                 e.preventDefault();
                 const hash = link.getAttribute("href").split("/").pop();
                 const tabName = hash.replace(".html", "");
+                if (location.pathname.includes("orders-item.html")) {
+                    window.location.href = `lk.html#${tabName}`;
+                    return;
+                }
                 history.pushState(null, "", `#${tabName}`);
                 openTabFromHash();
             });
         });
         openTabFromHash();
         window.addEventListener("hashchange", openTabFromHash);
+    }
+    function calcOrderTotal() {
+        const prices = document.querySelectorAll(".order-lk__price");
+        const totalEl = document.querySelector(".order-lk__digit");
+        if (!prices.length || !totalEl) return;
+        let total = 0;
+        prices.forEach(priceEl => {
+            const text = priceEl.textContent.replace(/[^\d.,]/g, "").replace(",", ".");
+            const value = parseFloat(text);
+            if (!isNaN(value)) total += value;
+        });
+        const formatted = total.toLocaleString("ru-RU");
+        totalEl.innerHTML = `${formatted}  ₽`;
     }
     document.addEventListener("DOMContentLoaded", () => {
         document.documentElement.addEventListener("click", e => {
@@ -835,6 +872,7 @@
             });
         });
         initLkTabs();
+        calcOrderTotal();
     });
     spollers();
 })();
